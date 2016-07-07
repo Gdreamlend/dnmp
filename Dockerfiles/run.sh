@@ -2,10 +2,10 @@
 
 [ -f /run-pre.sh ] && /run-pre.sh
 
-if [ ! -d /data/htdocs ] ; then
+if [ ! -d /web/www ] ; then
   echo "Create HTDOCS"
-  mkdir -p /data/htdocs
-  chown :www-data /data/htdocs
+  mkdir -p /web/www
+  chown :www-data /web/www
 fi
 
 # create all mysql neccessary database
@@ -52,12 +52,12 @@ EOF
 fi
 
 echo "STARTING PHP-FPM"
-mkdir -p /data/logs/php-fpm
+mkdir -p /web/logs/php-fpm
 php-fpm
 
 echo "STARTING NGINX"
-mkdir -p /data/logs/nginx
-mkdir -p /data/logs/php-fpm
+mkdir -p /web/logs/nginx
+mkdir -p /web/logs/php-fpm
 mkdir -p /tmp/nginx
 chown nginx /tmp/nginx
 nginx
