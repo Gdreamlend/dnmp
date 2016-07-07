@@ -1,5 +1,7 @@
 FROM alpine:3.4
 
+MAINTAINER ngineered <reid.niu@gmail.com>
+
 ENV TERM xterm
 
 RUN apk update 
@@ -27,5 +29,5 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
 WORKDIR /web/www
-VOLUME ["/etc/nginx/conf.d", "/web/www", "/web/logs", "/var/lib/mysql", "/etc/mysql/conf.d/"]
+VOLUME ["/web/www", "/etc/nginx/conf.d", "/web/logs", "/var/lib/mysql", "/etc/mysql/conf.d/"]
 CMD ["/run.sh"]
