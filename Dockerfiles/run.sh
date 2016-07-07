@@ -3,7 +3,7 @@
 [ -f /run-pre.sh ] && /run-pre.sh
 
 if [ ! -d /web/www ] ; then
-  echo "Create HTDOCS"
+  echo "Create web directory"
   mkdir -p /web/www
   chown :www-data /web/www
 fi
