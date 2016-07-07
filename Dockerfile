@@ -23,8 +23,8 @@ ADD Dockerfiles/run.sh         /
 
 RUN chmod +x /run.sh
 
-EXPOSE 80
+EXPOSE 80 443
 EXPOSE 3306
 WORKDIR /data/htdocs
-VOLUME ["/www", "/data/logs", "/var/lib/mysql", "/etc/mysql/conf.d/"]
+VOLUME ["/etc/nginx/conf.d", "/data/www", "/data/logs", "/var/lib/mysql", "/etc/mysql/conf.d/"]
 CMD ["/run.sh"]
