@@ -61,3 +61,6 @@ mkdir -p /web/logs/php-fpm
 mkdir -p /tmp/nginx
 chown nginx /tmp/nginx
 nginx
+
+echo "STARTING MYSQL"
+mysqld
