@@ -27,9 +27,9 @@ Run in Windows
   --name dnmp \
   -p 80:80 \
   -v d:/dnmp/conf.d:/etc/nginx/conf.d \
-  -v d:/data/mysql:/var/lib/mysql \
-  -v d:/data/logs:/data/logs \
-  -v d:/data/www:/data/www \
+  -v d:/web/mysql:/var/lib/mysql \
+  -v d:/web/logs:/web/logs \
+  -v d:/web/www:/web/www \
   dnmp
 ```
 
@@ -41,9 +41,9 @@ docker run -d \
   --name dnmp \
   -p 80:80 \
   -v /dnmp/conf.d:/etc/nginx/conf.d \
-  -v /data/mysql:/var/lib/mysql \
-  -v /data/logs:/data/logs \
-  -v /data/www:/data/www \
+  -v /web/mysql:/var/lib/mysql \
+  -v /web/logs:/web/logs \
+  -v /web/www:/web/www \
   dnmp
 ```
 
