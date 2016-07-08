@@ -55,6 +55,9 @@ echo "STARTING PHP-FPM"
 mkdir -p /web/logs/php-fpm
 php-fpm
 
+
+
+
 echo "STARTING NGINX"
 mkdir -p /web/logs/nginx
 mkdir -p /web/logs/php-fpm
