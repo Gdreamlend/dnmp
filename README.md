@@ -11,12 +11,38 @@ Package Included
 - mysql(mariadb 10.1.8)
 - composer
 
+
+
+Quickly build & run in Windows
+-----
+
+```
+  build.bat
+```
+
+
+
+
+Quickly build & run in Mac or Linux
+-----
+
+```
+  build.bat
+```
+
+
+
+
+
 Build
 -----
 
 ```console
 docker build -t dnmp .
 ```
+
+
+
 
 
 Run in Windows
@@ -33,7 +59,10 @@ Run in Windows
   dnmp
 ```
 
-Run in Mac Or Linux
+
+
+
+Run in Mac or Linux
 -----
 
 ```
