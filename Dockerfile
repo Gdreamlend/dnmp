@@ -6,8 +6,10 @@ ENV TERM xterm
 
 RUN apk update 
 
-RUN apk add --no-cache bash \
+RUN apk add bash \
             curl \
+            wget \
+            git \
             openrc \
             mysql \
             mysql-client \
