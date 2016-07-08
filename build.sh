@@ -15,12 +15,12 @@ echo "**************************************************************************
 docker build -t dnmp .
 
 
-if [ ! -d nginx.conf ] ; then
+if [ ! -d nginx ] ; then
   echo "**********************************************************************************************************************"
   echo "nginx配置目录不存，创建并复制默认配置文件..."
   echo "**********************************************************************************************************************"
-  mkdir nginx.conf
-  cp conf/default.conf nginx.conf/
+  mkdir nginx
+  cp conf/default.conf nginx/
 fi
 
 
@@ -54,7 +54,7 @@ echo "**************************************************************************
 docker run -d \
   -p 80:80 \
   --name dnmp \
-  -v $PWD/nginx.conf:/etc/nginx/conf.d \
+  -v $PWD/nginx:/etc/nginx/conf.d \
   -v $PWD/mysql:/var/lib/mysql \
   -v $PWD/logs:/web/logs \
   -v $PWD/www:/web/www \
