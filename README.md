@@ -13,7 +13,7 @@ Quickly build & run in Windows
 -----
 
 ```
-  build.bat
+  build.bat name<name> 80<port>
 ```
 
 
@@ -21,7 +21,7 @@ Quickly build & run in Mac or Linux
 -----
 
 ```
-  build.bat
+  ./build.sh name<name> 80<port>
 ```
 
 

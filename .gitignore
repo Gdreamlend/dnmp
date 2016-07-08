@@ -1,7 +1,7 @@
 .DS_Store
-nginx.conf
-mysql
-www
-logs
 conf/.DS_Store
-nginx.conf/.DS_Store
+.idea/
+.idea/copyright/
+.idea/dnmp.iml
+.idea/modules.xml
+.idea/workspace.xml
