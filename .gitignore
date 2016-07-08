@@ -1,3 +1,7 @@
 .DS_Store
 conf/.DS_Store
 .idea/
+mysql/
+www/
+logs/
+nginx/
