@@ -18,10 +18,10 @@ RUN mkdir -p /var/run/mysql/
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 RUN rm -rf /var/cache/apk/*
 
-ADD Dockerfiles/nginx.conf     /etc/nginx/
-ADD Dockerfiles/php-fpm.conf   /etc/php/
-ADD Dockerfiles/my.cnf         /etc/mysql/
-ADD Dockerfiles/run.sh         /
+ADD nginx.conf     /etc/nginx/
+ADD php-fpm.conf   /etc/php/
+ADD my.cnf         /etc/mysql/
+ADD run.sh         /
 
 RUN chmod +x /run.sh
 

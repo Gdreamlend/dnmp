@@ -5,7 +5,6 @@
 if [ ! -d /web/www ] ; then
   echo "Create web directory"
   mkdir -p /web/www
-  chown :www-data /web/www
 fi
 
 # create all mysql neccessary database
@@ -51,19 +50,19 @@ EOF
 ##################################
 fi
 
-echo "STARTING PHP-FPM"
+echo "Starting PHP-FPM ..."
 mkdir -p /web/logs/php-fpm
 php-fpm
 
 
-
-
-echo "STARTING NGINX"
+echo "Starting Nginx ..."
 mkdir -p /web/logs/nginx
-mkdir -p /web/logs/php-fpm
 mkdir -p /tmp/nginx
-chown nginx /tmp/nginx
+chown -R nginx:nginx /tmp/nginx
+#chown -R nginx:nginx /web/www
 nginx
 
-echo "STARTING MYSQL"
+
+echo "Starting MySQL ..."
+#chown -R mysql:mysql /var/lib/mysql
 mysqld
