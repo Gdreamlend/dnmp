@@ -1,13 +1,16 @@
 docker rm -f dnmp
 docker rmi -f dnmp
 docker build -t dnmp .
+
+mkdir mysql logs www
+
 docker run -d \
   -p 80:80 \
   --name dnmp \
-  -v ~/web/conf.d:/etc/nginx/conf.d \
-  -v ~/web/mysql:/var/lib/mysql \
-  -v ~/web/logs:/web/logs \
-  -v ~/web/www:/web/www \
+  -v $PWD/conf.d:/etc/nginx/conf.d \
+  -v $PWD/mysql:/var/lib/mysql \
+  -v $PWD/logs:/web/logs \
+  -v $PWD/www:/web/www \
   dnmp
 
 docker images
