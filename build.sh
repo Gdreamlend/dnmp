@@ -9,25 +9,29 @@ docker rmi -f dnmp
 echo "创建dnmp镜像"
 docker build -t dnmp .
 
-echo "若nginx配置目录不存在就创建，并复制默认配置文件"
+
 if [ ! -d nginx.conf ] ; then
+  echo "nginx配置目录不存，创建并复制默认配置文件..."
   mkdir nginx.conf
   cp conf/default.conf nginx.conf/
 fi
 
-echo "若www目录不存在就创建，并复制默认站点主页文件"
+
 if [ ! -d www ] ; then
+  echo "www目录不存在，创建并复制默认站点主页文件..."
   mkdir -p www/default
   cp conf/index.php www/default/
 fi
 
-echo "若logs目录不存在就创建"
+
 if [ ! -d logs ] ; then
+  echo "logs目录不存在，创建..."
   mkdir logs
 fi
 
-echo "若mysql目录不存在就创建"
+
 if [ ! -d mysql ] ; then
+  echo "mysql目录不存，就创建..."
   mkdir mysql
 fi
 
