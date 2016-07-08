@@ -9,5 +9,6 @@ docker run -d \
   -v d:/web/logs:/web/logs \
   -v d:/web/www:/web/www \
   dnmp
+docker images
 docker ps
 docker logs dnmp

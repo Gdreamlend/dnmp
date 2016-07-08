@@ -4,8 +4,6 @@
 Package Included
 --------------------
 
-- alpine(3.4)
-- git
 - nginx(1.8.0)
 - php-fpm(5.6.15)
 - mysql(mariadb 10.1.8)
