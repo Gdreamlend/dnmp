@@ -3,12 +3,10 @@
 
 Package Included
 --------------------
-
 - nginx(1.8.0)
 - php-fpm(5.6.15)
 - mysql(mariadb 10.1.8)
 - composer
-
 
 
 Quickly build & run in Windows
@@ -19,8 +17,6 @@ Quickly build & run in Windows
 ```
 
 
-
-
 Quickly build & run in Mac or Linux
 -----
 
@@ -29,18 +25,12 @@ Quickly build & run in Mac or Linux
 ```
 
 
-
-
-
 Build
 -----
 
 ```console
 docker build -t dnmp .
 ```
-
-
-
 
 
 Run in Windows
@@ -58,8 +48,6 @@ Run in Windows
 ```
 
 
-
-
 Run in Mac or Linux
 -----
 
@@ -67,10 +55,10 @@ Run in Mac or Linux
 docker run -d \
   --name dnmp \
   -p 80:80 \
-  -v /dnmp/conf.d:/etc/nginx/conf.d \
-  -v /web/mysql:/var/lib/mysql \
-  -v /web/logs:/web/logs \
-  -v /web/www:/web/www \
+  -v ~/dnmp/conf.d:/etc/nginx/conf.d \
+  -v ~/web/mysql:/var/lib/mysql \
+  -v ~/web/logs:/web/logs \
+  -v ~/web/www:/web/www \
   dnmp
 ```
 
