@@ -59,10 +59,8 @@ echo "Starting Nginx ..."
 mkdir -p /web/logs/nginx
 mkdir -p /tmp/nginx
 chown -R nginx:nginx /tmp/nginx
-#chown -R nginx:nginx /web/www
 nginx
 
 
 echo "Starting MySQL ..."
-#chown -R mysql:mysql /var/lib/mysql
 mysqld
