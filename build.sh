@@ -28,7 +28,7 @@ prefix='                       '
 
 
 echo $hr
-echo $prefix
+echo "$prefix 欢迎使用联想DNMP系统!"
 
 
 while :; do echo
