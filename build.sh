@@ -26,7 +26,7 @@ done
 
 if [ -d ../$datadir/$pname ] ; then
   echo $hr
-  echo "$prefix 此项目已存在, 重建或升级镜像和容器?  $prefix"
+  echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
       while :; do echo
         read -p "仅重建升级:Y 删除数据后重建升级:D 取消操作:N: " YES
