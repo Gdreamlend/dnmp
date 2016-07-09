@@ -38,7 +38,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7-iconv \
     php7-json \
     php7-phar \
-    php5-soap \
+    php7-soap \
     php7-dom
 
 RUN apk add -u musl
