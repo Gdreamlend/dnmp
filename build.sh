@@ -28,17 +28,22 @@ prefix='                       '
 
 
 
-if [ $1 ]; then
-       pname=$1
-       echo $hr
-       echo "$prefix 项目名称为 $pname "
-       echo $hr
-       else
-       pname='web'
-       echo $hr
-       echo "$prefix 没有定义项目名, 默认为 $pname "
-       echo $hr
-fi
+while :; do echo
+    read -p "请输入镜像、容器、项目的共同名称: " pname
+    [ -n "$pname" ] && break
+done
+
+while :; do echo
+    read -p "请输入端口号: " port
+    [ -n "$port" ] && break
+done
+clear
+
+
+echo $hr
+echo "$prefix 项目 $pname 的端口为 $port "
+echo $hr
+
 
 echo $hr
 echo "$prefix 删除已有 $pname 容器"
@@ -93,17 +98,7 @@ echo $hr
 echo "$prefix 创建 $pname 容器，运行并挂载目录 "
 echo $hr
 
-if [ $2 ]; then
-           port=$2
-           echo $hr
-           echo "$prefix 端口为 $port "
-           echo $hr
-       else
-           port=80
-           echo $hr
-           echo "$prefix 没有定义端口, 默认为 $port "
-           echo $hr
-fi
+
 
 docker run -d \
   -p 80:${port} \
