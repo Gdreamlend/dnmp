@@ -2,19 +2,22 @@
 
 [ -f /run-pre.sh ] && /run-pre.sh
 
-
+hr='—————————————————————————————————————————————————————————————————————————————————'
+prefix='                       '
 
 if [ ! -d /web/www/default ] ; then
-  echo "**********************************************************************************************************************"
-  echo "运行容器时没有挂载www目录,自动创建目录和文件..."
+  echo $hr
+  echo "$prefix 没有挂载www目录, 使用默认..."
+  echo $hr
   mkdir -p /web/www/default
   echo "<?php phpinfo(); ?>" >> /web/www/default/index.php
 fi
 
 # create all mysql neccessary database
 if [ ! -f /var/lib/mysql/ibdata1 ]; then
-  echo "**********************************************************************************************************************"
-  echo "挂载的数据库目录下没有发现数据库,初始化数据库..."
+  echo $hr
+  echo "$prefix 挂载的数据库目录下没有数据库, 初始化数据库..."
+  echo $hr
   mysql_install_db --user=root > /dev/null
 
   if [ ! -d "/run/mysqld" ]; then
@@ -36,14 +39,16 @@ UPDATE user SET password=PASSWORD("") WHERE user='root' AND host='localhost';
 EOF
 
   if [ "$MYSQL_DATABASE" != "" ]; then
-    echo "**********************************************************************************************************************"
+    echo $hr
     echo "[i] Creating database: app_tests"
     echo "CREATE DATABASE IF NOT EXISTS \`app_tests\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $tfile
+    echo $hr
 
     if [ "$MYSQL_USER" != "" ]; then
+      echo $hr
       echo "[i] Creating user: admin with password admin"
-      echo "**********************************************************************************************************************"
       echo "GRANT ALL ON \`admin\`.* to 'admin'@'%' IDENTIFIED BY 'admin';" >> $tfile
+      echo $hr
     fi
   fi
 
@@ -54,15 +59,15 @@ EOF
 fi
 
 
-echo "**********************************************************************************************************************"
-echo "Starting PHP-FPM ..."
+echo $hr
+echo "$prefix 启动 PHP-FPM ..."
 mkdir -p /web/logs/php-fpm
 php-fpm7
 
 
 
-echo "**********************************************************************************************************************"
-echo "Starting Nginx ..."
+echo $hr
+echo "$prefix 启动 Nginx ..."
 mkdir -p /web/logs/nginx
 mkdir -p /tmp/nginx
 chown -R nginx:nginx /tmp/nginx
@@ -70,10 +75,10 @@ nginx
 
 
 
-echo "**********************************************************************************************************************"
-echo "Starting MySQL ..."
+echo $hr
+echo "$prefix 启动 MySQL ..."
 mysqld
 
 echo "**********************************************************************************************************************"
-echo "Starting supervisord and services ..."
+echo "$prefix 启动supervisord and services ..."
 /usr/bin/supervisord -n -c /etc/supervisord.conf
