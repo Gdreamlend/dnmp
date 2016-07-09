@@ -16,6 +16,9 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     supervisor \
     curl \
     git \
+    ca-certificates \
+    mysql \
+    mysql-client \
     php7-fpm \
     php7-pdo \
     php7-pdo_mysql \
