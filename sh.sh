@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ $1 ]; then
-       pname=$1
+       pname=800
        echo "项目名称为$pname"
        else
        pname='web'

@@ -9,59 +9,65 @@ if [ $1 ]; then
 fi
 
 echo "**********************************************************************************************************************"
-echo "强制删除已有$1容器"
-docker rm -f $1
+echo "强制删除已有$pname容器"
+docker rm -f $pname
 
 echo "**********************************************************************************************************************"
-echo "强制删除已有$1镜像"
-docker rmi -f $1
+echo "强制删除已有$pname镜像"
+docker rmi -f $pname
 
 echo "**********************************************************************************************************************"
-echo "创建$1镜像"
-docker build -t $1 .
+echo "创建$pname镜像"
+docker build -t $pname .
 
 
-if [ ! -d ../$1/nginx ] ; then
+if [ ! -d ../$pname/nginx ] ; then
   echo "**********************************************************************************************************************"
   echo "Nginx配置目录不存在，创建并复制默认配置文件..."
-  mkdir ../$1/nginx
-  cp conf/default.conf ../$1/nginx/default.conf
+  mkdir ../$pname/nginx
+  cp conf/default.conf ../$pname/nginx/default.conf
 fi
 
 
-if [ ! -d ../$1/www ] ; then
+if [ ! -d ../$pname/www ] ; then
   echo "**********************************************************************************************************************"
   echo "www目录不存在，创建并复制默认站点主页文件..."
-  mkdir -p ../$1/www/default
-  cp conf/index.php ../$1/www/default/
+  mkdir -p ../$pname/www/default
+  cp conf/index.php ../$pname/www/default/
 fi
 
 
-if [ ! -d ../$1/logs ] ; then
+if [ ! -d ../$pname/logs ] ; then
   echo "**********************************************************************************************************************"
   echo "logs目录不存在，创建..."
-  mkdir ../$1/logs
+  mkdir ../$pname/logs
 fi
 
 
-if [ ! -d ../$1/mysql ] ; then
+if [ ! -d ../$pname/mysql ] ; then
   echo "**********************************************************************************************************************"
   echo "mysql目录不存，创建..."
-  mkdir ../$1/mysql
+  mkdir ../$pname/mysql
 fi
 
 echo "**********************************************************************************************************************"
 echo "根据镜像创建容器，运行并挂载目录"
-if [ ! $2 ]; then  
-       $2='80'  
-fi  
+
+if [ $2 ]; then
+       port=$2
+       echo "端口为$port"
+       else
+       port=80
+       echo "没有定义端口, 默认为$port"
+fi
+
 docker run -d \
-  -p 80:$2 \
-  --name $1 \
-  -v $PWD/../$1/nginx:/etc/nginx/conf.d \
-  -v $PWD/../$1/mysql:/var/lib/mysql \
-  -v $PWD/../$1/logs:/web/logs \
-  -v $PWD/../$1/www:/web/www \
+  -p 80:$port \
+  --name $pname \
+  -v $PWD/../$pname/nginx:/etc/nginx/conf.d \
+  -v $PWD/../$pname/mysql:/var/lib/mysql \
+  -v $PWD/../$pname/logs:/web/logs \
+  -v $PWD/../$pname/www:/web/www \
   $1
 
 echo "**********************************************************************************************************************"
@@ -73,5 +79,5 @@ echo "显示当前容器的进程"
 docker ps
 
 echo "**********************************************************************************************************************"
-echo "输出$1容器的日志"
-docker logs $1
+echo "输出$pname容器的日志"
+docker logs $pname
