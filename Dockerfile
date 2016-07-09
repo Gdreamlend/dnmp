@@ -48,8 +48,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer && \
-    rm -rf /var/cache/apk/* && \
-    rm -Rf /etc/nginx/nginx.conf
+    rm -rf /var/cache/apk/*
 
 
 # tweak php-fpm config
@@ -73,10 +72,11 @@ sed -i -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" ${fpm_
 ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
 find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
-ADD conf/supervisord.conf  /etc/supervisord.conf
-ADD conf/nginx.conf        /etc/nginx/nginx.conf
-ADD conf/default.conf      /etc/nginx/conf.d/default.conf
+
+ADD conf/nginx.conf        /etc/nginx/
+ADD conf/default.conf      /etc/nginx/conf.d/
 ADD conf/my.cnf            /etc/mysql/
+ADD conf/supervisord.conf  /etc/supervisord.conf
 ADD conf/run.sh            /
 
 RUN chmod +x /run.sh
