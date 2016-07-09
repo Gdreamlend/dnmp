@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if [ ! $1 ]; then
-       $1='web'
+       $1="web"
        echo "没有参数"
+       echo $1
 fi
