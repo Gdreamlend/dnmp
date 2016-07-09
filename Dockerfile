@@ -44,6 +44,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
 RUN apk add -u musl
 
 
+
 RUN mkdir -p /var/lib/mysql && \
     mkdir -p /etc/mysql/conf.d && \
     mkdir -p /var/run/mysql/ && \
