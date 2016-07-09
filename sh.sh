@@ -1,7 +1,6 @@
 #!/bin/bash
 webdir = $1
 if [ ! $1 ]; then
-       webdir = "web"
+       webdir = 'web'
 fi
-echo $webdir
-
+echo ${webdir}
