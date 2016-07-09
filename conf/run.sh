@@ -30,6 +30,7 @@ hr2='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
 prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ '
 
 
+
 # 如果用户挂载的nginx配置目录没有文件
 if [ ! -f /etc/nginx/conf.d/* ] ; then
     cp /default.conf /etc/nginx/conf.d/
