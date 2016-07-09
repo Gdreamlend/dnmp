@@ -16,7 +16,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     supervisor \
     curl \
     git \
-    ca-certificates \
+    #ca-certificates \
     mysql \
     mysql-client \
     php7-fpm \
@@ -48,10 +48,10 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     mkdir -p /etc/nginx/conf.d && \
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
-    #php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    #php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
-    #php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
-    #php7 -r "unlink('composer-setup.php');" && \
+    php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
+    php7 -r "unlink('composer-setup.php');" && \
     rm -rf /var/cache/apk/* && \
     rm -Rf /etc/nginx/nginx.conf && \
     #apk add -u musl && \
