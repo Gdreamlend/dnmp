@@ -40,9 +40,22 @@ done
 clear
 
 
+
+
 echo $hr
 echo "$prefix 项目 $pname 的端口为 $port "
-echo $hr
+
+
+
+if [ -d ../$pname ] ; then
+  echo $hr
+  echo "$prefix $pname 项目已存在, 将重建(升级)镜像和容器, 不会影响到项目的数据!"
+  echo $hr
+fi
+
+
+
+
 
 
 echo $hr
