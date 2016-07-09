@@ -27,6 +27,9 @@ hr='—————————————————————————�
 prefix='                       '
 
 
+echo $hr
+echo $prefix
+
 
 while :; do echo
     read -p "请输入镜像、容器、项目的共同名称: " pname
