@@ -30,15 +30,20 @@ hr2='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
 prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ '
 
 
-
-
-if [ ! -d /web/www/default ] ; then
-  echo $hr
-  echo "$prefix 没有挂载www目录, 使用默认..."
-  echo $hr
-  mkdir -p /web/www/default
-  echo "<?php phpinfo(); ?>" >> /web/www/default/index.php
+# 如果用户挂载的nginx配置目录没有文件
+if [ ! -f /etc/nginx/conf.d/* ] ; then
+    cp /default.conf /etc/nginx/conf.d/
+    # 如果默认网站不存在
+    if [ ! -d /web/www/default ] ; then
+      echo $hr
+      echo "$prefix 没有挂载www目录, 使用默认..."
+      echo $hr
+      mkdir -p /web/www/default
+      echo "<?php phpinfo(); ?>" >> /web/www/default/index.php
+    fi
 fi
+
+
 
 # create all mysql neccessary database
 if [ ! -f /var/lib/mysql/ibdata1 ]; then
