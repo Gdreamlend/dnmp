@@ -2,9 +2,6 @@ FROM alpine:3.4
 
 MAINTAINER ngineered <reid.niu@gmail.com>
 
-ENV php_conf /etc/php7/php.ini
-ENV fpm_conf /etc/php7/php-fpm.d/www.conf
-
 RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     apk update && \
     apk add bash \
