@@ -2,52 +2,93 @@ FROM alpine:3.4
 
 MAINTAINER ngineered <reid.niu@gmail.com>
 
-ENV TERM xterm
 
-RUN apk update 
+ENV php_conf /etc/php7/php.ini
+ENV fpm_conf /etc/php7/php-fpm.d/www.conf
+ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae
 
-RUN apk add bash \
-            curl \
-            wget \
-            git \
-            openrc \
-            mysql \
-            mysql-client \
-            nginx \
-            ca-certificates \
-            php5-fpm \
-            php5-json \
-            php5-zlib \
-            php5-xml \
-            php5-pdo \
-            php5-phar \
-            php5-openssl \
-            php5-pdo_mysql \
-            php5-mysqli \
-            php5-gd \
-            php5-iconv \
-            php5-mcrypt \
-            php5-curl \
-            php5-json \
-            php5-dom \
-            php5-ctype \
-            php5-soap \
-            php5-xsl \
-            php5-intl \
-            php5-memcache \
-            php5-sqlite3 \
-            php5-pgsql
-RUN apk add -u musl
-  
-RUN mkdir -p /var/lib/mysql
-RUN mkdir -p /etc/mysql/conf.d
-RUN mkdir -p /var/run/mysql/
-  
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-RUN rm -rf /var/cache/apk/*
 
+RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache bash \
+    curl \
+    openssh-client \
+    supervisor \
+    wget \
+    git \
+    openrc \
+    mysql \
+    mysql-client \
+    nginx \
+    ca-certificates \
+    php7-fpm \
+    php7-pdo \
+    php7-pdo_mysql \
+    php7-mysqlnd \
+    php7-mysqli \
+    php7-mcrypt \
+    php7-ctype \
+    php7-zlib \
+    php7-gd \
+    php7-intl \
+    php7-memcached \
+    php7-sqlite3 \
+    php7-pdo_pgsql \
+    php7-pgsql \
+    php7-xml \
+    php7-xsl \
+    php7-curl \
+    php7-openssl \
+    php7-iconv \
+    php7-json \
+    php7-phar \
+    php5-soap \
+    php7-dom && \
+    apk add -u musl && \
+    mkdir -p /var/lib/mysql && \
+    mkdir -p /etc/mysql/conf.d && \
+    mkdir -p /var/run/mysql/ && \
+    mkdir -p /etc/nginx/conf.d && \
+    mkdir -p /run/nginx && \
+    mkdir -p /var/log/supervisor && \
+    php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
+    php7 -r "unlink('composer-setup.php');" && \
+    rm -rf /var/cache/apk/* && \
+    rm -Rf /etc/nginx/nginx.conf
+
+
+
+
+
+
+# tweak php-fpm config
+RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} && \
+sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf} && \
+sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf} && \
+sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf} && \
+sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" ${fpm_conf} && \
+sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" ${fpm_conf} && \
+sed -i -e "s/pm.max_children = 4/pm.max_children = 4/g" ${fpm_conf} && \
+sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" ${fpm_conf} && \
+sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" ${fpm_conf} && \
+sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" ${fpm_conf} && \
+sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" ${fpm_conf} && \
+sed -i -e "s/user = nobody/user = nginx/g" ${fpm_conf} && \
+sed -i -e "s/group = nobody/group = nginx/g" ${fpm_conf} && \
+sed -i -e "s/;listen.mode = 0660/listen.mode = 0666/g" ${fpm_conf} && \
+sed -i -e "s/;listen.owner = nobody/listen.owner = nginx/g" ${fpm_conf} && \
+sed -i -e "s/;listen.group = nobody/listen.group = nginx/g" ${fpm_conf} && \
+sed -i -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" ${fpm_conf} && \
+ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
+find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+
+
+
+
+ADD conf/default.conf   /etc/nginx/conf.d/
 ADD conf/nginx.conf     /etc/nginx/
-ADD conf/php-fpm.conf   /etc/php/
 ADD conf/my.cnf         /etc/mysql/
 ADD conf/run.sh         /
 
