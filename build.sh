@@ -37,11 +37,8 @@ while :; do echo
     [ -n "$pname" ] && break
 done
 
-while :; do echo
-    read -p "请输入端口号: " port
-    [ -n "$port" ] && break
-done
-clear
+
+
 
 
 
@@ -64,6 +61,12 @@ if [  $YES!="Y" ] ; then
   echo $hr
   exit
 fi
+
+
+while :; do echo
+    read -p "请输入端口号: " port
+    [ -n "$port" ] && break
+done
 
 
 echo $hr
