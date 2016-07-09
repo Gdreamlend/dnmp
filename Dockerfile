@@ -49,9 +49,11 @@ RUN mkdir -p /var/lib/mysql && \
     mkdir -p /var/run/mysql/ && \
     mkdir -p /etc/nginx/conf.d && \
     mkdir -p /run/nginx && \
-    mkdir -p /var/log/supervisor && \
-    curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer && \
-    rm -rf /var/cache/apk/*
+    mkdir -p /var/log/supervisor
+
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN rm -rf /var/cache/apk/*
 
 
 ADD conf/nginx.conf        /etc/nginx/
