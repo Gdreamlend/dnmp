@@ -1,69 +1,70 @@
 #!/bin/bash
 
+hr='————————————————————————————————————————————————'
 if [ $1 ]; then
        pname=$1
-       echo "————————————————————————————————"
+       echo $hr
        echo "  项目名称为 $pname "
-       echo "————————————————————————————————"
+       echo $hr
        else
        pname='web'
-       echo "————————————————————————————————"
+       echo $hr
        echo "  没有定义项目名, 默认为 $pname "
-       echo "————————————————————————————————"
+       echo $hr
 fi
 
-echo "————————————————————————————————"
+echo $hr
 echo "  删除已有 $pname 容器"
-echo "————————————————————————————————"
+echo $hr
 docker rm -f $pname
 
-echo "————————————————————————————————"
+echo $hr
 echo "  删除已有 $pname 镜像"
-echo "————————————————————————————————"
+echo $hr
 docker rmi -f $pname
 
-echo "————————————————————————————————"
+echo $hr
 echo "  创建 $pname 镜像"
-echo "————————————————————————————————"
+echo $hr
 docker build -t $pname .
 
 
 if [ ! -d ../$pname/nginx ] ; then
-  echo "————————————————————————————————"
+  echo $hr
   echo "  Nginx配置目录不存在，使用默认..."
-  echo "————————————————————————————————"
+  echo $hr
   mkdir ../$pname/nginx
   cp conf/default.conf ../$pname/nginx/default.conf
 fi
 
 
 if [ ! -d ../$pname/www ] ; then
-  echo "————————————————————————————————"
+  echo $hr
   echo "  www目录不存在，使用默认..."
-  echo "————————————————————————————————"
+  echo $hr
   mkdir -p ../$pname/www/default
   cp conf/index.php ../$pname/www/default/
 fi
 
 
 if [ ! -d ../$pname/logs ] ; then
-  echo "————————————————————————————————"
+  echo $hr
   echo "  Logs目录不存在，创建..."
-  echo "————————————————————————————————"
+  echo $hr
   mkdir ../$pname/logs
 fi
 
 
 if [ ! -d ../$pname/mysql ] ; then
-  echo "————————————————————————————————"
+  echo $hr
   echo "  Mysql目录不存，创建..."
-  echo "————————————————————————————————"
+  echo $hr
   mkdir ../$pname/mysql
 fi
 
-echo "————————————————————————————————"
+echo $hr
 echo "  创建 $pname 容器，运行并挂载目录 "
-echo "————————————————————————————————"
+echo $hr
 
 if [ $2 ]; then
        port=$2
@@ -82,17 +83,17 @@ docker run -d \
   -v $PWD/../$pname/www:/web/www \
   $1
 
-echo "————————————————————————————————"
+echo $hr
 echo "    显示当前的镜像列表"
-echo "————————————————————————————————"
+echo $hr
 docker images
 
-echo "————————————————————————————————"
+echo $hr
 echo "    显示当前容器的进程"
-echo "————————————————————————————————"
+echo $hr
 docker ps
 
-echo "————————————————————————————————"
+echo $hr
 echo "    输出 $pname 容器日志"
-echo "————————————————————————————————"
+echo $hr
 docker logs $pname
