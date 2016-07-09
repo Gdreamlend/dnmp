@@ -17,29 +17,29 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     ca-certificates \
     mysql \
     mysql-client \
-    php7-fpm \
-    php7-pdo \
-    php7-pdo_mysql \
-    php7-mysqlnd \
-    php7-mysqli \
-    php7-mcrypt \
-    php7-ctype \
-    php7-zlib \
-    php7-gd \
-    php7-intl \
-    php7-memcached \
-    php7-sqlite3 \
-    php7-pdo_pgsql \
-    php7-pgsql \
-    php7-xml \
-    php7-xsl \
-    php7-curl \
-    php7-openssl \
-    php7-iconv \
-    php7-json \
-    php7-phar \
+    php5-fpm \
+    php5-pdo \
+    php5-pdo_mysql \
+    php5-mysqlnd \
+    php5-mysqli \
+    php5-mcrypt \
+    php5-ctype \
+    php5-zlib \
+    php5-gd \
+    php5-intl \
+    php5-memcached \
+    php5-sqlite3 \
+    php5-pdo_pgsql \
+    php5-pgsql \
+    php5-xml \
+    php5-xsl \
+    php5-curl \
+    php5-openssl \
+    php5-iconv \
+    php5-json \
+    php5-phar \
     php5-soap \
-    php7-dom
+    php5-dom
 
 RUN apk add -u musl
 
@@ -60,30 +60,9 @@ ADD conf/nginx.conf        /etc/nginx/
 ADD conf/default.conf      /
 ADD conf/my.cnf            /etc/mysql/
 ADD conf/supervisord.conf  /etc/supervisord.conf
+ADD conf/php-fpm.conf      /etc/php/
 ADD conf/run.sh            /
 RUN chmod +x /run.sh
-
-
-# tweak php-fpm config
-RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} && \
-sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf} && \
-sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf} && \
-sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf} && \
-sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" ${fpm_conf} && \
-sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" ${fpm_conf} && \
-sed -i -e "s/pm.max_children = 4/pm.max_children = 4/g" ${fpm_conf} && \
-sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" ${fpm_conf} && \
-sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" ${fpm_conf} && \
-sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" ${fpm_conf} && \
-sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" ${fpm_conf} && \
-sed -i -e "s/user = nobody/user = nginx/g" ${fpm_conf} && \
-sed -i -e "s/group = nobody/group = nginx/g" ${fpm_conf} && \
-sed -i -e "s/;listen.mode = 0660/listen.mode = 0666/g" ${fpm_conf} && \
-sed -i -e "s/;listen.owner = nobody/listen.owner = nginx/g" ${fpm_conf} && \
-sed -i -e "s/;listen.group = nobody/listen.group = nginx/g" ${fpm_conf} && \
-sed -i -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" ${fpm_conf} && \
-ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
-find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 
 
