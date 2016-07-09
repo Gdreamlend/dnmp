@@ -45,20 +45,25 @@ clear
 
 
 
-echo $hr
-echo "$prefix 项目 $pname 的端口为 $port "
-
-
-
 if [ -d ../$pname ] ; then
   echo $hr
-  echo "$prefix $pname 项目已存在, 将重建(升级)镜像和容器, 不会影响到项目的数据!"
+  echo "$prefix $pname 项目已存在, 重建(升级)镜像和容器? 不会影响到项目的数据! "
   echo $hr
+      while :; do echo
+        read -p "确认Y, 取消任意: " YES
+        [ -n "$YES" ] && break
+      done
 fi
 
 
 
+if [  ! "$YES"='Y' ] ; then
+  exit
+fi
 
+
+echo $hr
+echo "$prefix 项目 $pname 的端口为 $port "
 
 
 echo $hr
