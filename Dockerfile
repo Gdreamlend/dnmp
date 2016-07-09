@@ -43,8 +43,9 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
     rm -rf /var/cache/apk/* && \
-RUN apk add -u musl
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+    apk add -u musl && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
+    rm -Rf /etc/nginx/nginx.conf && \
 
 
 # tweak php-fpm config
@@ -68,13 +69,11 @@ sed -i -e "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" ${fpm_
 ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
 find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
-ADD conf/supervisord.conf /etc/supervisord.conf
-# Copy our nginx config
-RUN rm -Rf /etc/nginx/nginx.conf
-ADD conf/nginx.conf     /etc/nginx/nginx.conf
-ADD conf/default.conf   /etc/nginx/conf.d/default.conf
-ADD conf/my.cnf         /etc/mysql/
-ADD conf/run.sh         /
+ADD conf/supervisord.conf  /etc/supervisord.conf
+ADD conf/nginx.conf        /etc/nginx/nginx.conf
+ADD conf/default.conf      /etc/nginx/conf.d/default.conf
+ADD conf/my.cnf            /etc/mysql/
+ADD conf/run.sh            /
 
 RUN chmod +x /run.sh
 
