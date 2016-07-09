@@ -47,7 +47,7 @@ done
 
 
 
-if [ -d ../$pname ] ; then
+if [ -d data/$pname ] ; then
   echo $hr
   echo "$prefix 此项目已存在, 重建或升级镜像和容器?  $prefix"
   echo "$prefix 重建或升级不会影响你的私有项目数据!  $prefix"
@@ -95,37 +95,37 @@ echo $hr
 docker build -t $pname .
 
 
-if [ ! -d ../$pname/nginx ] ; then
+if [ ! -d data/$pname/nginx ] ; then
   echo $hr
   echo "$prefix Nginx配置目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir ../$pname/nginx
-  cp conf/default.conf ../$pname/nginx/default.conf
+  mkdir -p data/$pname/nginx
+  cp conf/default.conf data/$pname/nginx/
 fi
 
 
-if [ ! -d ../$pname/www ] ; then
+if [ ! -d data/$pname/www ] ; then
   echo $hr
   echo "$prefix www目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir -p ../$pname/www/default
-  cp conf/index.php ../$pname/www/default/
+  mkdir -p data/$pname/www/default
+  cp conf/index.php data/$pname/www/default/
 fi
 
 
-if [ ! -d ../$pname/logs ] ; then
+if [ ! -d data/$pname/logs ] ; then
   echo $hr
   echo "$prefix Logs目录不存在，创建... $prefix"
   echo $hr
-  mkdir ../$pname/logs
+  mkdir -p data/$pname/logs
 fi
 
 
-if [ ! -d ../$pname/mysql ] ; then
+if [ ! -d data/$pname/mysql ] ; then
   echo $hr
   echo "$prefix Mysql目录不存，创建... $prefix"
   echo $hr
-  mkdir ../$pname/mysql
+  mkdir -p data/$pname/mysql
 fi
 
 
@@ -144,10 +144,10 @@ echo $hr
 docker run -d \
   -p 80:${port} \
   --name $pname \
-  -v $PWD/../$pname/nginx:/etc/nginx/conf.d \
-  -v $PWD/../$pname/mysql:/var/lib/mysql \
-  -v $PWD/../$pname/logs:/web/logs \
-  -v $PWD/../$pname/www:/web/www \
+  -v $PWD/data/$pname/nginx:/etc/nginx/conf.d \
+  -v $PWD/data/$pname/mysql:/var/lib/mysql \
+  -v $PWD/data/$pname/logs:/web/logs \
+  -v $PWD/data/$pname/www:/web/www \
   $pname
 
 
