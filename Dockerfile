@@ -51,6 +51,15 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     rm -rf /var/cache/apk/*
 
 
+
+ADD conf/nginx.conf        /etc/nginx/
+ADD conf/default.conf      /etc/nginx/conf.d/
+ADD conf/my.cnf            /etc/mysql/
+ADD conf/supervisord.conf  /etc/supervisord.conf
+ADD conf/run.sh            /
+RUN chmod +x /run.sh
+
+
 # tweak php-fpm config
 RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} && \
 sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf} && \
@@ -73,13 +82,9 @@ ln -s /etc/php7/php.ini /etc/php7/conf.d/php.ini && \
 find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 
-ADD conf/nginx.conf        /etc/nginx/
-ADD conf/default.conf      /etc/nginx/conf.d/
-ADD conf/my.cnf            /etc/mysql/
-ADD conf/supervisord.conf  /etc/supervisord.conf
-ADD conf/run.sh            /
 
-RUN chmod +x /run.sh
+
+
 
 EXPOSE 80 443 3306
 WORKDIR /web/www

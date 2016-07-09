@@ -127,7 +127,6 @@ docker ps
 
 
 echo $hr
-echo "$prefix 输出 $pname 容器日志"
-echo $hr
-docker logs $pname
+echo "$prefix 登录 $pname 服务器"
+docker exec -it $pname bash
 
