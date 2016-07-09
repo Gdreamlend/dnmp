@@ -8,10 +8,8 @@ ENV fpm_conf /etc/php7/php-fpm.d/www.conf
 RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     apk update && \
     apk add bash \
-    wget \
     nginx \
     curl \
-    git \
     ca-certificates \
     mysql \
     mysql-client \
@@ -25,7 +23,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php5-gd \
     php5-intl \
     php5-memcached \
-    php5-sqlite3 \
     php5-pdo_pgsql \
     php5-pgsql \
     php5-xml \
