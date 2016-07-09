@@ -39,9 +39,12 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7-json \
     php7-phar \
     php5-soap \
-    php7-dom && \
-    apk add -u musl && \
-    mkdir -p /var/lib/mysql && \
+    php7-dom
+
+RUN apk add -u musl
+
+
+RUN mkdir -p /var/lib/mysql && \
     mkdir -p /etc/mysql/conf.d && \
     mkdir -p /var/run/mysql/ && \
     mkdir -p /etc/nginx/conf.d && \
@@ -49,7 +52,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     mkdir -p /var/log/supervisor && \
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/bin --filename=composer && \
     rm -rf /var/cache/apk/*
-
 
 
 ADD conf/nginx.conf        /etc/nginx/
