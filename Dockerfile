@@ -54,7 +54,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php7 -r "unlink('composer-setup.php');" && \
     #curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
-    rm -rf /var/cache/apk/* && \
+    #rm -rf /var/cache/apk/* && \
     rm -Rf /etc/nginx/nginx.conf
 
 
