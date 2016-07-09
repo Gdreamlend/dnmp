@@ -3,24 +3,19 @@ FROM alpine:3.4
 MAINTAINER ngineered <reid.niu@gmail.com>
 
 
+
 ENV php_conf /etc/php7/php.ini
 ENV fpm_conf /etc/php7/php-fpm.d/www.conf
 ENV composer_hash e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae
 
-
-RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-    apk update && \
-    apk add bash \
-    curl \
+RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && apk update && \
+    apk add --no-cache bash \
     openssh-client \
-    supervisor \
     wget \
-    git \
-    openrc \
-    mysql \
-    mysql-client \
     nginx \
-    ca-certificates \
+    supervisor \
+    curl \
+    git \
     php7-fpm \
     php7-pdo \
     php7-pdo_mysql \
@@ -44,7 +39,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7-phar \
     php5-soap \
     php7-dom && \
-    apk add -u musl && \
     mkdir -p /var/lib/mysql && \
     mkdir -p /etc/mysql/conf.d && \
     mkdir -p /var/run/mysql/ && \
@@ -57,9 +51,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php7 -r "unlink('composer-setup.php');" && \
     rm -rf /var/cache/apk/* && \
     rm -Rf /etc/nginx/nginx.conf
-
-
-
 
 
 
