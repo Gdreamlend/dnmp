@@ -59,7 +59,6 @@ if [ -d ../$pname ] ; then
 
       if [  $YES!='Y' ] ; then
         echo "$prefix 有缘再见  $prefix"
-        echo $YES
         echo $hr
         exit
      fi
