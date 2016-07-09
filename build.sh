@@ -57,38 +57,37 @@ if [ -d ../$pname ] ; then
         [ -n "$YES" ] && break
       done
 
-      if [  $YES!='Y' ] ; then
+      if [ $YES == 'Y' ]
+      then
+        echo $hr
+        echo "$prefix 删除已有 $pname 容器 $prefix"
+        echo $hr
+        docker rm -f $pname
+
+        echo $hr
+        echo "$prefix 删除已有 $pname 镜像 $prefix"
+        echo $hr
+        docker rmi -f $pname
+      else
+        echo $hr
         echo "$prefix 有缘再见  $prefix"
         echo $hr
         exit
-     fi
+      fi
 
 fi
 
 
 
 
-
+echo $hr
+echo "$prefix 配置端口号 $prefix"
 
 while :; do echo
     read -p "请输入端口号: " port
     [ -n "$port" ] && break
 done
 
-
-echo $hr
-echo "$prefix 项目 $pname 的端口为 $port  $prefix"
-
-
-echo $hr
-echo "$prefix 删除已有 $pname 容器 $prefix"
-echo $hr
-docker rm -f $pname
-
-echo $hr
-echo "$prefix 删除已有 $pname 镜像 $prefix"
-echo $hr
-docker rmi -f $pname
 
 echo $hr
 echo "$prefix 创建 $pname 镜像 $prefix"
