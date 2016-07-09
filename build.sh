@@ -49,8 +49,8 @@ done
 
 if [ -d ../$pname ] ; then
   echo $hr
-  echo "$prefix $pname 已存在, 重建或升级镜像和容器?  $prefix"
-  echo "$prefix 重建或升级不会影响你的项目数据!  $prefix"
+  echo "$prefix 此项目已存在, 重建或升级镜像和容器?  $prefix"
+  echo "$prefix 重建或升级不会影响你的私有项目数据!  $prefix"
   echo $hr
       while :; do echo
         read -p "重建或升级(Y/N): " YES
