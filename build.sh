@@ -136,9 +136,9 @@ docker run -d \
 
 
 echo $hr
-echo "$prefix 显示当前容器的进程 $prefix"
+echo "$prefix 显示当前容器列表 $prefix"
 echo $hr
-docker ps
+docker ps -a
 
 
 
