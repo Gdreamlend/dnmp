@@ -20,7 +20,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php5-fpm \
     php5-pdo \
     php5-pdo_mysql \
-    php5-mysqlnd \
     php5-mysqli \
     php5-mcrypt \
     php5-ctype \
