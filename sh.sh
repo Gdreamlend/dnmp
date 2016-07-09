@@ -1,8 +1,0 @@
-#!/bin/bash
-if [ $1 ]; then
-       pname=$1
-       echo "项目名称为$pname"
-       else
-       pname=90
-       echo "没有定义项目名称, 默认为$pname"
-fi
