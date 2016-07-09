@@ -57,9 +57,8 @@ fi
 
 
 
-if [  "$YES"='N' ] ; then
+if [  $YES=="N" ] ; then
   echo $hr
-  echo $YES
   echo "$prefix 有缘再见 "
   echo $hr
   exit
