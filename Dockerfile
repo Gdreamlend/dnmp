@@ -8,10 +8,8 @@ ENV fpm_conf /etc/php7/php-fpm.d/www.conf
 RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     apk update && \
     apk add bash \
-    openssh-client \
     wget \
     nginx \
-    supervisor \
     curl \
     git \
     ca-certificates \
@@ -38,35 +36,23 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php5-json \
     php5-phar \
     php5-soap \
-    php5-dom
-
-RUN apk add -u musl
-
-
-
-RUN mkdir -p /var/lib/mysql && \
+    php5-dom && \
+    apk add -u musl && \
+    mkdir -p /var/lib/mysql && \
     mkdir -p /etc/mysql/conf.d && \
     mkdir -p /var/run/mysql/ && \
     mkdir -p /etc/nginx/conf.d && \
     mkdir -p /run/nginx && \
-    mkdir -p /var/log/supervisor
-
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-RUN rm -rf /var/cache/apk/*
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
+    rm -rf /var/cache/apk/*
 
 
 ADD conf/nginx.conf        /etc/nginx/
 ADD conf/default.conf      /
 ADD conf/my.cnf            /etc/mysql/
-ADD conf/supervisord.conf  /etc/supervisord.conf
 ADD conf/php-fpm.conf      /etc/php/
 ADD conf/run.sh            /
 RUN chmod +x /run.sh
-
-
-
-
 
 
 EXPOSE 80 443 3306
