@@ -60,6 +60,10 @@ fi
 
 
 echo $hr
+echo "$prefix 启动supervisord and services ..."
+/usr/bin/supervisord -n -c /etc/supervisord.conf
+
+echo $hr
 echo "$prefix 启动 PHP-FPM ..."
 mkdir -p /web/logs/php-fpm
 php-fpm7
@@ -79,6 +83,3 @@ echo $hr
 echo "$prefix 启动 MySQL ..."
 mysqld
 
-echo "**********************************************************************************************************************"
-echo "$prefix 启动supervisord and services ..."
-/usr/bin/supervisord -n -c /etc/supervisord.conf
