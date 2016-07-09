@@ -81,7 +81,7 @@ docker run -d \
   -v $PWD/../$pname/mysql:/var/lib/mysql \
   -v $PWD/../$pname/logs:/web/logs \
   -v $PWD/../$pname/www:/web/www \
-  $1
+  $pname
 
 echo $hr
 echo "    显示当前的镜像列表"
