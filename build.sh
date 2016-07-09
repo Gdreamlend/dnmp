@@ -56,7 +56,7 @@ fi
 
 
 
-if [  $YES!=Y' ] ; then
+if [  $YES!='Y' ] ; then
   echo "$prefix 有缘再见 "
   echo $YES
   echo $hr
