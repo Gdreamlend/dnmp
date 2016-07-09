@@ -47,17 +47,17 @@ clear
 
 if [ -d ../$pname ] ; then
   echo $hr
-  echo "$prefix $pname 项目已存在, 重建(升级)镜像和容器? 不会影响到项目的数据! "
+  echo "$prefix $pname 已存在, 重建/升级镜像? 不会影响到项目的数据! "
   echo $hr
       while :; do echo
-        read -p "确认Y, 取消任意: " YES
+        read -p "取消N, 确认任意: " YES
         [ -n "$YES" ] && break
       done
 fi
 
 
 
-if [  ! "$YES"='Y' ] ; then
+if [  "$YES"='N' ] ; then
   exit
 fi
 
