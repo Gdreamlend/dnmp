@@ -113,7 +113,7 @@ fi
 
 
 echo $hr
-echo "$prefix 显示当前的镜像列表 $prefix"
+echo "$prefix 当前的镜像列表 $prefix"
 echo $hr
 docker images
 
@@ -136,7 +136,7 @@ docker run -d \
 
 
 echo $hr
-echo "$prefix 显示当前容器列表 $prefix"
+echo "$prefix 当前容器列表 $prefix"
 echo $hr
 docker ps -a
 
