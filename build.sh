@@ -51,14 +51,13 @@ done
 if [ -d ../$datadir/$pname ] ; then
   echo $hr
   echo "$prefix 此项目已存在, 重建或升级镜像和容器?  $prefix"
-  echo "$prefix 重建或升级不会影响你的私有项目数据!  $prefix"
   echo $hr
       while :; do echo
-        read -p "重建或升级(Y/N): " YES
+        read -p "仅重建或升级:Y 删除所有数据后重建升级:D 取消操作:N): " YES
         [ -n "$YES" ] && break
       done
 
-      if [ $YES == 'Y' ]
+      if [ $YES == 'Y' || $YES == 'D' ]
       then
         echo $hr
         echo "$prefix 删除已有 $pname 容器 $prefix"
@@ -69,6 +68,14 @@ if [ -d ../$datadir/$pname ] ; then
         echo "$prefix 删除已有 $pname 镜像 $prefix"
         echo $hr
         docker rmi -f $pname
+
+          if [ $YES == 'D' ] ; then
+            echo $hr
+            echo "$prefix 删除 $pname 数据文件 $prefix"
+            echo $hr
+            rm -rf ../$datadir/$pname
+          fi
+
       else
         echo $hr
         echo "$prefix 有缘再见  $prefix"
