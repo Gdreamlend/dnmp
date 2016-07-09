@@ -49,17 +49,17 @@ clear
 if [ -d ../$pname ] ; then
   echo $hr
   echo "$prefix $pname 已存在, 重建或升级镜像和容器? "
-  echo "$prefix 此操作不会影响你的项目数据! "
+  echo "$prefix 重建或升级不会影响你的项目数据! "
   echo $hr
       while :; do echo
-        read -p "重建或升级请输入任意字符, 取消请输入N: " YES
+        read -p "重建或升级(Y/N): " YES
         [ -n "$YES" ] && break
       done
 fi
 
 
 
-if [  $YES=="N" ] ; then
+if [  $YES!="Y" ] ; then
   echo "$prefix 有缘再见 "
   echo $hr
   exit
