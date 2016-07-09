@@ -43,7 +43,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
     rm -rf /var/cache/apk/* && \
-
+RUN apk add -u musl
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 
