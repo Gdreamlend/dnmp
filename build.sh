@@ -57,7 +57,7 @@ if [ -d ../$datadir/$pname ] ; then
         [ -n "$YES" ] && break
       done
 
-      if [ $YES == 'Y' || $YES == 'D' ]
+      if [[ $YES == 'Y' || $YES == 'D' ]]
       then
         echo $hr
         echo "$prefix 删除已有 $pname 容器 $prefix"
@@ -84,7 +84,6 @@ if [ -d ../$datadir/$pname ] ; then
       fi
 
 fi
-
 
 
 
