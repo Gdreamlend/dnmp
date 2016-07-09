@@ -53,7 +53,7 @@ if [ -d ../$datadir/$pname ] ; then
   echo "$prefix 此项目已存在, 重建或升级镜像和容器?  $prefix"
   echo $hr
       while :; do echo
-        read -p "仅重建或升级:Y 删除所有数据后重建升级:D 取消操作:N): " YES
+        read -p "仅重建升级:Y 删除数据后重建升级:D 取消操作:N: " YES
         [ -n "$YES" ] && break
       done
 
