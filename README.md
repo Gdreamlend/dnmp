@@ -9,21 +9,6 @@ Package Included
 - composer
 
 
-Quickly build & run in Windows
------
-
-```
-  build.bat
-```
-
-
-Quickly build & run in Mac or Linux
------
-
-```
-  ./build.sh
-```
-
 
 Build
 -----

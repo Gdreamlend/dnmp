@@ -53,7 +53,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
 
 
 ADD conf/nginx.conf        /etc/nginx/
-ADD conf/default.conf      /etc/nginx/conf.d/
 ADD conf/my.cnf            /etc/mysql/
 ADD conf/supervisord.conf  /etc/supervisord.conf
 ADD conf/run.sh            /
