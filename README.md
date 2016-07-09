@@ -1,5 +1,6 @@
 # Docker Nginx Mysql PHP
 
+PACKAGE YOUR APPLICATION INTO A STANDARDIZED UNIT FOR SOFTWARE DEVELOPMENT
 
 Package Included
 --------------------
@@ -11,7 +12,7 @@ Package Included
 
 
 
-Quickly build & run in Windows
+Quickly build & run for Windows
 -----
 
 ```
@@ -19,7 +20,7 @@ Quickly build & run in Windows
 ```
 
 
-Quickly build & run in Mac or Linux
+Quickly build & run for Mac / Linux
 -----
 
 ```
@@ -31,7 +32,7 @@ Quickly build & run in Mac or Linux
 Build
 -----
 
-```console
+```
 docker build -t dnmp .
 ```
 
