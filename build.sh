@@ -47,7 +47,7 @@ clear
 
 if [ -d ../$pname ] ; then
   echo $hr
-  echo "$prefix $pname 已存在, 要重建/升级镜像? 不会影响项目数据! "
+  echo "$prefix $pname 已存在, 重建/升级? 不会影响项目数据! "
   echo $hr
       while :; do echo
         read -p "取消N, 确认任意: " YES
