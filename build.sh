@@ -128,10 +128,17 @@ if [ ! -d ../$pname/mysql ] ; then
   mkdir ../$pname/mysql
 fi
 
-echo $hr
-echo "$prefix 创建 $pname 容器，运行并挂载目录 $prefix"
-echo $hr
 
+echo $hr
+echo "$prefix 显示当前的镜像列表 $prefix"
+echo $hr
+docker images
+
+
+
+echo $hr
+echo "$prefix 运行 $pname 容器并挂载本地目录 $prefix"
+echo $hr
 
 
 docker run -d \
@@ -143,10 +150,7 @@ docker run -d \
   -v $PWD/../$pname/www:/web/www \
   $pname
 
-echo $hr
-echo "$prefix 显示当前的镜像列表 $prefix"
-echo $hr
-docker images
+
 
 echo $hr
 echo "$prefix 显示当前容器的进程 $prefix"
@@ -156,6 +160,6 @@ docker ps
 
 
 echo $hr
-echo "$prefix 登录 $pname 服务器 $prefix"
+echo "$prefix SSH 登录 $pname 服务器 $prefix"
 docker exec -it $pname bash
 
