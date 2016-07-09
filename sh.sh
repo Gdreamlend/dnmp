@@ -1,7 +1,7 @@
 #!/bin/bash
-
+webdir = $1
 if [ ! $1 ]; then
-       $1="web"
-       echo "没有参数"
-       echo $1
+       webdir = "web"
 fi
+echo $webdir
+
