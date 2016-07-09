@@ -58,6 +58,9 @@ fi
 
 
 if [  "$YES"='N' ] ; then
+  echo $hr
+  echo "$prefix 有缘再见 "
+  echo $hr
   exit
 fi
 
