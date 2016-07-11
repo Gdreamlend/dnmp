@@ -22,11 +22,11 @@ done
 
 
 while :; do echo
-read -p "Windows:W     其他系统:Z: " SYS
+read -p "Windows:1     Mac/Linux:2: " SYS
 [ -n "$SYS" ] && break
 done
 
-if [ $SYS == 'W' ]
+if [ $SYS == '1' ]
 then
   datadir='d:/dnmp-data'
 else
@@ -40,23 +40,23 @@ if [ -d $datadir/$pname ] ; then
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
       while :; do echo
-        read -p "仅重建升级环境:Y     删除数据后重建升级环境:D     取消操作:N: " YES
+        read -p "仅重建升级环境:1     删除数据后重建升级环境:2     取消操作:3: " YES
         [ -n "$YES" ] && break
       done
 
-      if [[ $YES == 'Y' || $YES == 'D' ]]
+      if [[ $YES == '1' || $YES == '2' ]]
       then
         echo $hr
         echo "$prefix 删除已有 $pname 容器 $prefix"
         echo $hr
-        docker rm -f $pname
+        docker rm -f $pname || true
 
         echo $hr
         echo "$prefix 删除已有 $pname 镜像 $prefix"
         echo $hr
-        docker rmi -f $pname
+        docker rmi -f $pname || true
 
-          if [ $YES == 'D' ] ; then
+          if [ $YES == '2' ] ; then
             echo $hr
             echo "$prefix 删除 $pname 数据文件 $prefix"
             echo $hr
@@ -90,7 +90,7 @@ done
 echo $hr
 echo "$prefix 拉取 DNMP 基本镜像 $prefix"
 echo $hr
-docker pull reidniu/dnmp
+docker pull reidniu/dnmp:latest
 
 
 if [ ! -d $datadir/$pname/nginx ] ; then
@@ -146,7 +146,7 @@ docker run -d \
   -v $datadir/$pname/mysql:/var/lib/mysql \
   -v $datadir/$pname/logs:/web/logs \
   -v $datadir/$pname/www:/web/www \
-  reidniu/dnmp
+  reidniu/dnmp:latest
 
 
 
