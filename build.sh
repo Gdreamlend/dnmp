@@ -1,16 +1,16 @@
 #!/bin/bash
 hr=''
-prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ '
-datadir='dnmp-data'
+prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ '
+datadir='../dnmp-data'
 
 echo ''
 echo ''
 echo $hr
-echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
+echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
 echo ''
-echo "                                              欢迎使用联想DNMP系统"
+echo "                                                                 欢迎使用联想DNMP系统"
 echo ''
-echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
+echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
 
 
 while :; do echo
@@ -24,7 +24,7 @@ done
 
 
 
-if [ -d ../$datadir/$pname ] ; then
+if [ -d $datadir/$pname ] ; then
   echo $hr
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
@@ -49,7 +49,7 @@ if [ -d ../$datadir/$pname ] ; then
             echo $hr
             echo "$prefix 删除 $pname 数据文件 $prefix"
             echo $hr
-            rm -rf ../$datadir/$pname
+            rm -rf $datadir/$pname
           fi
 
       else
@@ -72,43 +72,48 @@ while :; do echo
 done
 
 
+#echo $hr
+#echo "$prefix 创建 $pname 镜像 $prefix"
+#echo $hr
+#docker build -t $pname .
+
 echo $hr
-echo "$prefix 创建 $pname 镜像 $prefix"
+echo "$prefix 拉取 DNMP 基本镜像 $prefix"
 echo $hr
-docker build -t $pname .
+docker pull reidniu/dnmp
 
 
-if [ ! -d ../$datadir/$pname/nginx ] ; then
+if [ ! -d $datadir/$pname/nginx ] ; then
   echo $hr
   echo "$prefix Nginx配置目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir -p ../$datadir/$pname/nginx
-  cp conf/default.conf ../$datadir/$pname/nginx/
+  mkdir -p $datadir/$pname/nginx
+  cp conf/default.conf $datadir/$pname/nginx/
 fi
 
 
-if [ ! -d ../$datadir/$pname/www ] ; then
+if [ ! -d $datadir/$pname/www ] ; then
   echo $hr
   echo "$prefix www目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir -p ../$datadir/$pname/www/default
-  cp conf/index.php ../$datadir/$pname/www/default/
+  mkdir -p $datadir/$pname/www/default
+  cp conf/index.php $datadir/$pname/www/default/
 fi
 
 
-if [ ! -d ../$datadir/$pname/logs ] ; then
+if [ ! -d $datadir/$pname/logs ] ; then
   echo $hr
   echo "$prefix Logs目录不存在，创建... $prefix"
   echo $hr
-  mkdir -p ../$datadir/$pname/logs
+  mkdir -p $datadir/$pname/logs
 fi
 
 
-if [ ! -d ../$datadir/$pname/mysql ] ; then
+if [ ! -d $datadir/$pname/mysql ] ; then
   echo $hr
   echo "$prefix Mysql目录不存，创建... $prefix"
   echo $hr
-  mkdir -p ../$datadir/$pname/mysql
+  mkdir -p $datadir/$pname/mysql
 fi
 
 
@@ -120,18 +125,18 @@ docker images
 
 
 echo $hr
-echo "$prefix 运行 $pname 容器并挂载本地目录 $prefix"
+echo "$prefix 运行 $pname 并挂载目录 $prefix"
 echo $hr
 
 
 docker run -d \
   -p 80:${port} \
   --name $pname \
-  -v $PWD/../$datadir/$pname/nginx:/etc/nginx/conf.d \
-  -v $PWD/../$datadir/$pname/mysql:/var/lib/mysql \
-  -v $PWD/../$datadir/$pname/logs:/web/logs \
-  -v $PWD/../$datadir/$pname/www:/web/www \
-  $pname
+  -v $datadir/$pname/nginx:/etc/nginx/conf.d \
+  -v $datadir/$pname/mysql:/var/lib/mysql \
+  -v $datadir/$pname/logs:/web/logs \
+  -v $datadir/$pname/www:/web/www \
+  reidniu/dnmp
 
 
 
