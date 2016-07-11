@@ -33,7 +33,7 @@ else
 fi
 
 
-if [ -d $datadir/$pname ] ; then
+if [ -d $datadir/www/$pname ] ; then
   echo $hr
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
@@ -58,7 +58,7 @@ if [ -d $datadir/$pname ] ; then
             echo $hr
             echo "$prefix 删除 $pname 数据文件 $prefix"
             echo $hr
-            rm -rf $datadir/$pname
+            rm -rf $datadir/www/$pname
           fi
 
       else
@@ -91,37 +91,37 @@ echo $hr
 docker pull reidniu/dnmp:latest
 
 
-if [ ! -d $datadir/$pname/nginx ] ; then
+if [ ! -d $datadir/nginx ] ; then
   echo $hr
   echo "$prefix Nginx配置目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir -p $datadir/$pname/nginx
-  cp conf/default.conf $datadir/$pname/nginx/
+  mkdir -p $datadir/nginx
+  cp conf/default.conf $datadir/nginx/
 fi
 
 
-if [ ! -d $datadir/$pname/www ] ; then
+if [ ! -d $datadir/www/$pname ] ; then
   echo $hr
   echo "$prefix www目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir -p $datadir/$pname/www/default
-  cp conf/index.php $datadir/$pname/www/default/
+  mkdir -p $datadir/www/$pname/default/
+  cp conf/index.php $datadir/www/$pname/default/
 fi
 
 
-if [ ! -d $datadir/$pname/logs ] ; then
+if [ ! -d $datadir/logs ] ; then
   echo $hr
   echo "$prefix Logs目录不存在，创建... $prefix"
   echo $hr
-  mkdir -p $datadir/$pname/logs
+  mkdir -p $datadir/logs
 fi
 
 
-if [ ! -d $datadir/$pname/mysql ] ; then
+if [ ! -d $datadir/mysql ] ; then
   echo $hr
   echo "$prefix Mysql目录不存，创建... $prefix"
   echo $hr
-  mkdir -p $datadir/$pname/mysql
+  mkdir -p $datadir/mysql
 fi
 
 
@@ -140,10 +140,10 @@ echo $hr
 docker run -d \
   -p 80:${port} \
   --name $pname \
-  -v $datadir/$pname/nginx:/etc/nginx/conf.d \
-  -v $datadir/$pname/mysql:/var/lib/mysql \
-  -v $datadir/$pname/logs:/web/logs \
-  -v $datadir/$pname/www:/web/www \
+  -v $datadir/nginx:/etc/nginx/conf.d \
+  -v $datadir/mysql:/var/lib/mysql \
+  -v $datadir/logs:/web/logs \
+  -v $datadir/www/$pname:/web/www \
   reidniu/dnmp:latest
 
 
