@@ -117,9 +117,12 @@ fi
 
 if [ ! -d $datadir/mysql ] ; then
   echo $hr
-  echo "$prefix Mysql目录不存，创建... $prefix"
+  echo "$prefix Mysql目录不存在，创建... $prefix"
   echo $hr
   mkdir -p $datadir/mysql
+  echo $hr
+  echo "$prefix Mysql创建成功，Root密码为空 $prefix"
+  echo $hr
 fi
 
 
