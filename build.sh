@@ -33,7 +33,6 @@ else
 fi
 
 
-
 if [ -d $datadir/$pname ] ; then
   echo $hr
   echo "$prefix $pname 已存在, 怎么办? $prefix"
