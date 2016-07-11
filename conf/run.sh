@@ -8,12 +8,12 @@ prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
 # 如果用户挂载的nginx配置目录没有文件
 if [ ! -f /etc/nginx/conf.d/* ] ; then
     cp /default.conf /etc/nginx/conf.d/
-    if [ ! -d /web/www/default ] ; then
+    if [ ! -d /web/www ] ; then
       echo $hr
       echo "$prefix 没有挂载www目录, 使用默认..."
       echo $hr
-      mkdir -p /web/www/default
-      echo "<?php phpinfo(); ?>" >> /web/www/default/index.php
+      mkdir -p /web/www
+      echo "<?php phpinfo(); ?>" >> /web/www/index.php
     fi
 fi
 

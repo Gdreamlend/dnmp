@@ -27,13 +27,13 @@ done
 
 if [ $SYS == '1' ]
 then
-  datadir='d:/dnmp-data'
+  datadir='d:/dnmp-'$pname
 else
-  datadir=$PWD'/../dnmp-data'
+  datadir=$PWD'/../dnmp-'$pname
 fi
 
 
-if [ -d $datadir/www/$pname ] ; then
+if [ -d $datadir ] ; then
   echo $hr
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
@@ -56,7 +56,7 @@ if [ -d $datadir/www/$pname ] ; then
             echo $hr
             echo "$prefix 删除 $pname 数据文件 $prefix"
             echo $hr
-            rm -rf $datadir/www/$pname
+            rm -rf $datadir
           fi
 
       else
@@ -78,10 +78,6 @@ while :; do echo
 done
 
 
-#echo $hr
-#echo "$prefix 创建 $pname 镜像 $prefix"
-#echo $hr
-#docker build -t $pname .
 
 echo $hr
 echo "$prefix 拉取 DNMP 基本镜像 $prefix"
@@ -98,12 +94,12 @@ if [ ! -d $datadir/nginx ] ; then
 fi
 
 
-if [ ! -d $datadir/www/$pname ] ; then
+if [ ! -d $datadir/www ] ; then
   echo $hr
   echo "$prefix www目录不存在，使用默认... $prefix"
   echo $hr
-  mkdir -p $datadir/www/$pname/default/
-  cp conf/index.php $datadir/www/$pname/default/
+  mkdir -p $datadir/www
+  cp conf/index.php $datadir/www
 fi
 
 
@@ -115,7 +111,7 @@ if [ ! -d $datadir/logs ] ; then
 fi
 
 
-if [ ! -d $datadir/mysql ] ; then
+if [ ! -f $datadir/mysql/ibdata1 ] ; then
   echo $hr
   echo "$prefix Mysql目录不存在，创建... $prefix"
   echo $hr
