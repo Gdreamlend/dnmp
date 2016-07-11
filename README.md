@@ -10,16 +10,6 @@ Package Included
 - composer
 
 
-
-
-Quickly build & run for Windows
------
-
-```
-  build.bat
-```
-
-
 Quickly build & run for Mac / Linux
 -----
 
@@ -27,6 +17,7 @@ Quickly build & run for Mac / Linux
   ./build.sh
 ```
 
+If your OS is Windows, make sure run build.sh after installed Git Bash.
 
 
 Build
