@@ -158,4 +158,3 @@ docker ps -a
 echo $hr
 echo "$prefix SSH 登录 $pname $prefix"
 docker exec -it $pname bash
-
