@@ -143,9 +143,8 @@ docker run -d \
   -v $datadir/nginx:/etc/nginx/conf.d \
   -v $datadir/mysql:/var/lib/mysql \
   -v $datadir/logs:/web/logs \
-  -v $datadir/www/$pname:/web/www \
+  -v $datadir/www:/web/www \
   reidniu/dnmp:latest
-
 
 
 echo $hr
