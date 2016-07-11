@@ -17,7 +17,7 @@ Quickly build & run for Mac / Linux
   ./build.sh
 ```
 
-If your OS is Windows, ensure that 'Git Bash' is installed before running 'build.sh'.
+If your OS is Windows, ensure that `Git Bash` is installed before running `build.sh`.
 
 
 Build
