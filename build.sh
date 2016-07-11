@@ -22,7 +22,7 @@ done
 
 
 while :; do echo
-read -p "Windows:W 其他系统:Z: " SYS
+read -p "Windows:W     其他系统:Z: " SYS
 [ -n "$SYS" ] && break
 done
 
@@ -40,7 +40,7 @@ if [ -d $datadir/$pname ] ; then
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
       while :; do echo
-        read -p "仅重建升级环境:Y 删除数据后重建升级环境:D 取消操作:N: " YES
+        read -p "仅重建升级环境:Y     删除数据后重建升级环境:D     取消操作:N: " YES
         [ -n "$YES" ] && break
       done
 
@@ -71,7 +71,6 @@ if [ -d $datadir/$pname ] ; then
       fi
 
 fi
-
 
 
 echo $hr
