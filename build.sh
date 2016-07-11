@@ -9,7 +9,7 @@ echo ''
 echo $hr
 echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
 echo ''
-echo "                                                                 欢迎使用联想DNMP系统"
+echo "                                      欢迎使用联想DNMP系统"
 echo ''
 echo "▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇"
 
@@ -40,7 +40,7 @@ if [ -d $datadir/$pname ] ; then
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
       while :; do echo
-        read -p "仅重建升级:Y 删除数据后重建升级:D 取消操作:N: " YES
+        read -p "仅重建升级环境:Y 删除数据后重建升级环境:D 取消操作:N: " YES
         [ -n "$YES" ] && break
       done
 
