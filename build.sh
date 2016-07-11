@@ -38,7 +38,7 @@ if [ -d $datadir/www/$pname ] ; then
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
       while :; do echo
-        read -p "仅重建升级环境:1    删除数据后重建升级环境:2    取消操作:3    请选择: " YES
+        read -p "仅重建升级环境:1    删除web数据后重建升级环境:2    取消操作:3    请选择: " YES
         [ -n "$YES" ] && break
       done
 
