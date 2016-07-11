@@ -45,14 +45,12 @@ if [ -d $datadir/www/$pname ] ; then
       if [[ $YES == '1' || $YES == '2' ]]
       then
         echo $hr
-        echo "$prefix 删除已有 $pname 容器 $prefix"
+        echo "$prefix 删除已有 $pname 容器和镜像 $prefix"
         echo $hr
         docker rm -f $pname || true
-
-        echo $hr
-        echo "$prefix 删除已有 $pname 镜像 $prefix"
-        echo $hr
         docker rmi -f $pname || true
+
+
 
           if [ $YES == '2' ] ; then
             echo $hr
