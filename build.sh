@@ -1,7 +1,7 @@
 #!/bin/bash
 hr=''
 prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ '
-datadir='../dnmp-data'
+datadir=$PWD'/../dnmp-data'
 
 echo ''
 echo ''
