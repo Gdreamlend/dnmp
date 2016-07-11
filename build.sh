@@ -1,7 +1,8 @@
 #!/bin/bash
 hr=''
 prefix='▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ '
-datadir=$PWD'/../dnmp-data'
+
+
 
 echo ''
 echo ''
@@ -20,7 +21,17 @@ done
 
 
 
+while :; do echo
+read -p "Windows:W 其他系统:Z: " SYS
+[ -n "$SYS" ] && break
+done
 
+if [ $SYS == 'W' ]
+then
+  datadir='d:/dnmp-data'
+else
+  datadir=$PWD'/../dnmp-data'
+fi
 
 
 
@@ -148,6 +159,6 @@ docker ps -a
 
 
 echo $hr
-echo "$prefix SSH 登录 $pname 服务器 $prefix"
+echo "$prefix SSH 登录 $pname $prefix"
 docker exec -it $pname bash
 
