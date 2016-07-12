@@ -4,11 +4,12 @@ PACKAGE YOUR APPLICATION INTO A STANDARDIZED UNIT FOR SOFTWARE DEVELOPMENT
 
 Package Included
 --------------------
-- nginx(1.8.0)
-- php-fpm(5.6.15)
-- mysql(mariadb 10.1.8)
-- composer
-
+- Nginx(1.8.0)
+- PHP-fpm(5.6.15)
+- Mysql(mariadb 10.1.8)
+- Composer
+- Git
+- SSH
 
 Quickly build & run for Mac / Linux
 -----
