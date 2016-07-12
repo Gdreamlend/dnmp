@@ -106,6 +106,16 @@ echo $hr
 docker pull reidniu/dnmp:latest
 
 
+if [ ! -d $datadir/ssh ] ; then
+  echo $hr
+  echo "$prefix SSH配置目录不存在，使用默认... $prefix"
+  echo $hr
+  mkdir -p $datadir/ssh
+  cp conf/id_rsa $datadir/ssh/
+  cp conf/id_rsa.pub $datadir/ssh/
+fi
+
+
 if [ ! -d $datadir/nginx ] ; then
   echo $hr
   echo "$prefix Nginx配置目录不存在，使用默认... $prefix"
@@ -158,6 +168,7 @@ echo $hr
 docker run -d \
   -p 80:${port} \
   --name $pname \
+  -v $datadir/ssh:/root/.ssh \
   -v $datadir/nginx:/etc/nginx/conf.d \
   -v $datadir/mysql:/var/lib/mysql \
   -v $datadir/logs:/web/logs \

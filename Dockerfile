@@ -40,11 +40,11 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     mkdir -p /var/run/mysql/ && \
     mkdir -p /etc/nginx/conf.d && \
     mkdir -p /run/nginx && \
-    mkdir -p ~/.ssh
+    mkdir -p /root/.ssh && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     rm -rf /var/cache/apk/*
 
-ADD conf/id_rsa.pub        ~/.ssh/
+ADD conf/id_rsa.pub        /root/.ssh/
 ADD conf/nginx.conf        /etc/nginx/
 ADD conf/default.conf      /
 ADD conf/my.cnf            /etc/mysql/
@@ -55,5 +55,5 @@ RUN chmod +x /run.sh
 
 EXPOSE 80 443 3306
 WORKDIR /web/www
-VOLUME ["/web/www", "/etc/nginx/conf.d", "/web/logs", "/var/lib/mysql", "/etc/mysql/conf.d/"]
+VOLUME ["/web/www", "/etc/nginx/conf.d", "/web/logs", "/var/lib/mysql", "/etc/mysql/conf.d/", "/root/.ssh"]
 CMD ["/run.sh"]
