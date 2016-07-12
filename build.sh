@@ -22,7 +22,7 @@ done
 
 while :; do echo
 read -p "Windows:1    Mac/Linux:2    请选择: " SYS
-[ -n "$SYS" ] && break
+[[ $SYS == '1' || $SYS == '2' ]] && break
 done
 
 if [ $SYS == '1' ]
@@ -38,44 +38,65 @@ if [ -d $datadir ] ; then
   echo "$prefix $pname 已存在, 怎么办? $prefix"
   echo $hr
       while :; do echo
-        read -p "仅重建升级环境:1    删除web数据后重建升级环境:2    取消操作:3    请选择: " YES
-        [ -n "$YES" ] && break
+          read -p "仅重建升级环境:1    删除web数据后重建升级环境:2    取消操作:3    请选择: " YES
+          if [[ $YES == '1' || $YES == '2' ]]
+          then
+            echo $hr
+            echo "$prefix 删除已有 $pname 容器和镜像 $prefix"
+            echo $hr
+            docker rm -f $pname || true
+            docker rmi -f $pname || true
+
+               if [ $YES == '2' ] ; then
+                 echo $hr
+                 echo "$prefix 删除 $pname 数据文件 $prefix"
+                 echo $hr
+                 rm -rf $datadir
+               fi
+               break
+           fi
+
+           if [ $YES == '3' ] ; then
+           echo $hr
+           echo "$prefix 有缘再见  $prefix"
+           echo $hr
+           exit
+           fi
       done
-
-      if [[ $YES == '1' || $YES == '2' ]]
-      then
-        echo $hr
-        echo "$prefix 删除已有 $pname 容器和镜像 $prefix"
-        echo $hr
-        docker rm -f $pname || true
-        docker rmi -f $pname || true
-
-
-
-          if [ $YES == '2' ] ; then
-            echo $hr
-            echo "$prefix 删除 $pname 数据文件 $prefix"
-            echo $hr
-            rm -rf $datadir
-          fi
-
-      else
-        echo $hr
-        echo "$prefix 有缘再见  $prefix"
-        echo $hr
-        exit
-      fi
-
 fi
+
+
+
+
+
+
+function isint () {
+    if [ $# -lt 1 ]; then
+        return 0
+    fi
+
+    if [[ $1 =~ ^-?[1-9][0-9]*$ ]]; then
+        return 1
+    fi
+
+    if [[ $1 =~ ^0$ ]]; then
+        return 1
+    fi
+
+    return 0
+}
 
 
 echo $hr
 echo "$prefix 配置端口号 $prefix"
-
 while :; do echo
     read -p "请输入端口号: " port
-    [ -n "$port" ] && break
+    isint $port
+    [ $? == '1' ]  && break
 done
+
+
+
 
 
 
