@@ -45,8 +45,8 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     rm -rf /var/cache/apk/*
 
-ADD conf/nginx.conf        /etc/nginx/
 ADD conf/default.conf      /
+ADD conf/nginx.conf        /etc/nginx/
 ADD conf/my.cnf            /etc/mysql/
 ADD conf/php-fpm.conf      /etc/php/
 ADD conf/run.sh            /
