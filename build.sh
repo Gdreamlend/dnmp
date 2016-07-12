@@ -44,8 +44,9 @@ if [ -d $datadir ] ; then
             echo $hr
             echo "$prefix 删除已有 $pname 容器和镜像 $prefix"
             echo $hr
-            docker rm -f $pname || true
-            docker rmi -f $pname || true
+            docker rm -f $pname
+            docker rmi -f $pname
+            docker rmi -f reidniu/dnmp
 
                if [ $YES == '2' ] ; then
                  echo $hr
