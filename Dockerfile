@@ -36,12 +36,12 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     php5-soap \
     php5-dom && \
     apk add -u musl && \
-#    mkdir -p /var/lib/mysql && \
-#    mkdir -p /etc/mysql/conf.d && \
-#    mkdir -p /var/run/mysql/ && \
-#    mkdir -p /etc/nginx/conf.d && \
-#    mkdir -p /run/nginx && \
-#    mkdir -p /root/.ssh && \
+    mkdir -p /var/lib/mysql && \
+    mkdir -p /etc/mysql/conf.d && \
+    mkdir -p /var/run/mysql/ && \
+    mkdir -p /etc/nginx/conf.d && \
+    mkdir -p /run/nginx && \
+    mkdir -p /root/.ssh && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     rm -rf /var/cache/apk/*
 
