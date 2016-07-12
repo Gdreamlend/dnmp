@@ -76,7 +76,7 @@ echo $hr
 echo "$prefix 配置端口号 $prefix"
 while :; do echo
     read -p "请输入端口号: " port
-    [[ $port =~ ^-?[1-9][0-9]*$ ]]  && break
+    [ -n $port ]  && break
 done
 
 
