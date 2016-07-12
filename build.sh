@@ -98,14 +98,6 @@ done
 
 
 
-
-
-echo $hr
-echo "$prefix 拉取 DNMP 基本镜像 $prefix"
-echo $hr
-docker pull reidniu/dnmp:latest
-
-
 if [ ! -d $datadir/ssh ] ; then
   echo $hr
   echo "$prefix SSH配置目录不存在，使用默认... $prefix"
