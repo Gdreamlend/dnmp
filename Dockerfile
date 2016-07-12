@@ -5,8 +5,11 @@ MAINTAINER ngineered <reid.niu@gmail.com>
 RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     apk update && \
     apk add bash \
+    openssh-client \
+    wget \
     nginx \
     curl \
+    openrc \
     ca-certificates \
     mysql \
     mysql-client \
