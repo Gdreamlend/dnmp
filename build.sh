@@ -138,6 +138,7 @@ echo $hr
 echo "$prefix 运行 $pname 并挂载目录 $prefix"
 echo $hr
 
+#docker build -t $pname .
 
 docker run -d \
   -p 80:${port} \
@@ -148,6 +149,8 @@ docker run -d \
   -v $datadir/logs:/web/logs \
   -v $datadir/www:/web/www \
   reidniu/dnmp:latest
+#  $pname
+
 
 
 echo $hr
