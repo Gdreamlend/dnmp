@@ -70,29 +70,13 @@ fi
 
 
 
-function isint () {
-    if [ $# -lt 1 ]; then
-        return 0
-    fi
-
-    if [[ $1 =~ ^-?[1-9][0-9]*$ ]]; then
-        return 1
-    fi
-
-    if [[ $1 =~ ^0$ ]]; then
-        return 1
-    fi
-
-    return 0
-}
 
 
 echo $hr
 echo "$prefix 配置端口号 $prefix"
 while :; do echo
     read -p "请输入端口号: " port
-    isint $port
-    [ $? == '1' ]  && break
+    [[[ $port =~ ^-?[1-9][0-9]*$ ]]  && break
 done
 
 
