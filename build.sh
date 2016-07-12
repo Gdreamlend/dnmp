@@ -111,8 +111,6 @@ if [ ! -d $datadir/ssh ] ; then
   echo "$prefix SSH配置目录不存在，使用默认... $prefix"
   echo $hr
   mkdir -p $datadir/ssh
-  cp conf/id_rsa $datadir/ssh/
-  cp conf/id_rsa.pub $datadir/ssh/
 fi
 
 
