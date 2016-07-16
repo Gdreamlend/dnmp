@@ -26,7 +26,7 @@ done
 
 if [ $SYS == '1' ]
 then
-  datadir='d:/dnmp-'$pname
+  datadir='C:/dnmp-'$pname
 else
   datadir=$PWD'/../dnmp-'$pname
 fi
